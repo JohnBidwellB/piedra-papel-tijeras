@@ -1,12 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles, withStyles } from "@material-ui/styles";
 import { TextField, Button, Grid, Typography } from "@material-ui/core";
 import { gameConstants } from "../../actions/types";
 import { useDispatch } from "react-redux";
 
+
+
 const useStyles = makeStyles(theme => ({
   root: {},
-  textField: {}
+  textField: {},
+  inputRoot: {
+    fontSize: "1.5em",
+    borderRadius: 60
+  },
+  labelProps: {
+    // width: "100%",
+    left: "50%",
+    top: "50%",
+    // right: "50%",
+    // textAlign: "center",
+    transform: "translate(-50%, -50%)"
+  },
+  focused: {
+    left: "50%",
+    top: "0%",
+    transform: "translate(-50%, 0%)",
+    "& label.Mui-focused": {
+      color: "green"
+    }
+    // borderColor: "green"
+  }
 }));
 
 const PlayersForm = props => {
@@ -51,6 +74,7 @@ const PlayersForm = props => {
             <Typography variant="h1">Ingreso de jugadores</Typography>
           </center>
         </Grid>
+
         <Grid item>
           <TextField
             id="player-1-set-name"
@@ -62,7 +86,19 @@ const PlayersForm = props => {
             className={classes.textField}
             fullWidth
             onChange={updateForm}
-            variant='outlined'
+            variant="outlined"
+            // inputProps={{
+            //   style: { textAlign: "center" }
+            // }}
+            // InputLabelProps={{style: classes.labelProps}}
+            InputProps={{classes: {root: classes.inputRoot}}}
+            InputLabelProps={{
+              classes: {
+                outlined: classes.label,
+                focused: classes.focused
+              }
+              // style: { transform: 'translate(50%, 0)' }
+            }}
           />
         </Grid>
         <Grid item>
@@ -76,7 +112,9 @@ const PlayersForm = props => {
             className={classes.textField}
             fullWidth
             onChange={updateForm}
-            variant='outlined'
+            variant="outlined"
+            inputProps={{ style: { textAlign: "center" } }}
+            // inputLabelProps={{ style: { textAlign: "center" } }}
           />
         </Grid>
         <Grid item>

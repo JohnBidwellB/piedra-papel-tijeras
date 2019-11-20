@@ -2,11 +2,13 @@
   "name": "piedra-papel-tijera",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://johnbidwellb.github.io/piedra-papel-tijeras/",
   "dependencies": {
     "@material-ui/core": "^4.6.1",
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.32",
     "connected-react-router": "^6.6.0",
+    "gh-pages": "^2.1.1",
     "notistack": "^0.9.6",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -23,7 +25,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -b master -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

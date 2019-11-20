@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/styles";
-import { TextField, Button, Grid } from "@material-ui/core";
+import { TextField, Button, Grid, Typography } from "@material-ui/core";
 import { gameConstants } from "../../actions/types";
 import { useDispatch } from "react-redux";
 
@@ -45,7 +45,12 @@ const PlayersForm = props => {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={4} direction="column">
+      <Grid container spacing={4} direction="column" justifyContent="center">
+        <Grid item>
+          <center>
+            <Typography variant="h1">Ingreso de jugadores</Typography>
+          </center>
+        </Grid>
         <Grid item>
           <TextField
             id="player-1-set-name"
@@ -57,6 +62,7 @@ const PlayersForm = props => {
             className={classes.textField}
             fullWidth
             onChange={updateForm}
+            variant='outlined'
           />
         </Grid>
         <Grid item>
@@ -70,6 +76,7 @@ const PlayersForm = props => {
             className={classes.textField}
             fullWidth
             onChange={updateForm}
+            variant='outlined'
           />
         </Grid>
         <Grid item>

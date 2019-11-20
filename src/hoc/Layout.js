@@ -1,14 +1,23 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, LinearProgress } from "@material-ui/core";
+import { Container, LinearProgress, Grid } from "@material-ui/core";
 import { useSelector } from "react-redux";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: "flex"
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   },
   content: {
     flexGrow: 1
+  },
+  container: {
+    position: "absolute",
+    left: "50%",
+    top: "50%",
+    transform: "translate(-50%, -50%)",
+    width: '100%'
   }
 }));
 
@@ -40,7 +49,9 @@ const Layout = props => {
           variant="determinate"
           value={getProgresValue(round.round)}
         />
-        <Container maxWidth="sm">{props.children}</Container>
+        <div className={classes.container}>
+          <Container maxWidth="sm">{props.children}</Container>
+        </div>
       </main>
     </div>
   );

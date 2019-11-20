@@ -15,8 +15,7 @@ const Routes = props => {
       <Layout>
         <ConnectedRouter history={history}>
           <Switch>
-            <Route exact path="/" component={DefaultPage} />
-            <Route exact path="/game" component={Game} />
+            <Route exact path={["/", "/game"]} component={Game} />
             <Route component={Error404} />
           </Switch>
         </ConnectedRouter>

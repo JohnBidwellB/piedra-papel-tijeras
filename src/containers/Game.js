@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import PlayersForm from "../components/Game/Players.form";
+import PlayersForm from "../components/Game/Players";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import RoundTitle from "../components/Game/RoundTitle";
@@ -9,8 +9,6 @@ import Winner from "../components/Game/Winner";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    // height: `${(window.innerHeight * 0, 7)}%`,
-    // margin: 'auto'
   }
 }));
 

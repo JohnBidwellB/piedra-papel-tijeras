@@ -6,10 +6,9 @@ import RoundTitle from "../components/Game/RoundTitle";
 import Results from "../components/Game/Results";
 import Round from "../components/Game/Round";
 import Winner from "../components/Game/Winner";
-
+import { Grid } from "@material-ui/core";
 const useStyles = makeStyles(theme => ({
-  root: {
-  }
+  root: {}
 }));
 
 const getScreen = round => {
@@ -22,10 +21,14 @@ const getScreen = round => {
       return <Round key={`round-${round.round}-player-${round.player}`} />;
     case 3:
       return (
-        <Fragment>
-          <Round key={`round-${round.round}-player-${round.player}`} />
-          <Results />
-        </Fragment>
+        <Grid container direction="column" spacing={3}>
+          <Grid item>
+            <Round key={`round-${round.round}-player-${round.player}`} />
+          </Grid>
+          <Grid item>
+            <Results />
+          </Grid>
+        </Grid>
       );
     case 4:
       return <Winner />;

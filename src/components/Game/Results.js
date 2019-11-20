@@ -1,5 +1,11 @@
 import React, { Fragment } from "react";
-import { Typography } from "@material-ui/core";
+import {
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  Grid
+} from "@material-ui/core";
 import { useSelector } from "react-redux";
 
 const Results = props => {
@@ -15,14 +21,33 @@ const Results = props => {
   console.log("Round: ", round);
   return (
     <Fragment>
-      <Typography>Resultados</Typography>
-      <Typography>Ronda Ganador</Typography>
-      {results.map((result, index) => (
-        <Typography>{index + 1} winner</Typography>
-      ))}
-      {/* <Button onClick={() => dispatch({ type: gameConstants.NEW_GAME })}>
-        Nuevo juego
-      </Button> */}
+      <Typography variant="h5">Resultados</Typography>
+      <List>
+        <ListItem>
+          <Grid container spacing={4}>
+            <Grid item xs={3}>
+              <ListItemText style={{ textAlign: "center" }}>Ronda</ListItemText>
+            </Grid>
+            <Grid item xs={9}>
+              <ListItemText>Ganador</ListItemText>
+            </Grid>
+          </Grid>
+        </ListItem>
+        {results.map((result, index) => (
+          <ListItem>
+            <Grid container spacing={4}>
+              <Grid item xs={3}>
+                <ListItemText style={{ textAlign: "center" }}>
+                  {index + 1}
+                </ListItemText>
+              </Grid>
+              <Grid item xs={9}>
+                <ListItemText>Ganador</ListItemText>
+              </Grid>
+            </Grid>
+          </ListItem>
+        ))}
+      </List>
     </Fragment>
   );
 };

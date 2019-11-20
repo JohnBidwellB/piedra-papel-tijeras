@@ -80,7 +80,7 @@ const PlayersForm = props => {
             fullWidth
             disabled={!valid}
             onClick={() =>
-              dispatch({ type: gameConstants.ENTER_PLAYERS, players })
+              dispatch({ type: gameConstants.ENTER_PLAYERS_FINISHED, players })
             }
           >
             Comenzar el juego

@@ -74,7 +74,6 @@ const PlayersForm = props => {
         </Grid>
         <Grid item>
           <Button
-            type="input"
             color="primary"
             variant="contained"
             fullWidth

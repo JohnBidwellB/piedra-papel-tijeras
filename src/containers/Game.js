@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
 import PlayersForm from "../components/Game/Players.form";
 import { makeStyles } from "@material-ui/core/styles";
-import { LinearProgress, Container } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import RoundTitle from "../components/Game/RoundTitle";
 import Results from "../components/Game/Results";
 import Round from "../components/Game/Round";
+import Winner from "../components/Game/Winner";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,40 +15,33 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const getScreen = round => {
-  console.log(round === "round_1");
-  console.log(typeof round);
-  switch (round) {
+  switch (round.round) {
     case 0:
-      console.log("Ho");
       return <PlayersForm />;
     case 1:
-      return <Round />;
+      return <Round key={`round-${round.round}-player-${round.player}`} />;
     case 2:
-      return <Round />;
+      return <Round key={`round-${round.round}-player-${round.player}`} />;
     case 3:
       return (
         <Fragment>
-          <Round />
+          <Round key={`round-${round.round}-player-${round.player}`} />
           <Results />
         </Fragment>
       );
-
     case 4:
-      return <Results />;
+      return <Winner />;
 
     case "round_1":
-      console.log("Hi");
       return <RoundTitle />;
     default:
-      console.log("he");
       return <PlayersForm />;
   }
 };
 
 const Game = props => {
   const classes = useStyles();
-  const round = useSelector(state => state.game.round.round);
-  console.log("Round: ", round);
+  const round = useSelector(state => state.game.round);
 
   return <div className={classes.root}>{getScreen(round)}</div>;
 };

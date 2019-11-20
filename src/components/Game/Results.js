@@ -1,10 +1,8 @@
 import React, { Fragment } from "react";
-import { Typography, Button } from "@material-ui/core";
-import { useSelector, useDispatch } from "react-redux";
-import { gameConstants } from "../../actions/types";
+import { Typography } from "@material-ui/core";
+import { useSelector } from "react-redux";
 
 const Results = props => {
-  const dispatch = useDispatch();
   const round = useSelector(state => state.game.round);
   const results =
     round &&
@@ -22,9 +20,9 @@ const Results = props => {
       {results.map((result, index) => (
         <Typography>{index + 1} winner</Typography>
       ))}
-      <Button onClick={() => dispatch({ type: gameConstants.NEW_GAME })}>
+      {/* <Button onClick={() => dispatch({ type: gameConstants.NEW_GAME })}>
         Nuevo juego
-      </Button>
+      </Button> */}
     </Fragment>
   );
 };

@@ -17,8 +17,35 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
   menu: {
-    width: 200
-  }
+    width: "100%"
+  },
+  menuItem: {
+    marginTop: 5
+  },
+
+  inputRoot: {
+    fontSize: "1.5em",
+    borderRadius: 60,
+    textAlign: "center"
+  },
+  input: {
+    left: "50%",
+    top: "50%",
+    transform: "translate(-50%, -50%)"
+  },
+  labelRoot: {},
+  labelProps: {
+    // left: "50%",
+    // top: "50%",
+    // transform: "translate(-50%, -50%)",
+  },
+  labelFocused: {
+    // Se activa cuando hago click en un input
+    left: "0%",
+    top: "0%",
+    transform: "translate(0%, 0%)"
+  },
+  notchedOutline: {}
 }));
 
 const Round = props => {
@@ -26,12 +53,16 @@ const Round = props => {
   const dispatch = useDispatch();
   const round = useSelector(state => state.game.round);
   const moves = useSelector(state => state.game.moves);
+  const player = useSelector(state =>
+    state.game.players.filter(player => player.id === round.player)
+  )[0];
+  console.log("Player: ", player)
   moves.map(move => {
     move.value = move.move;
     move.label = move.move;
-    return move
+    return move;
   });
-  const [move, setMove] = useState('');
+  const [move, setMove] = useState("");
 
   const handleChange = event => {
     setMove(event.target.value);
@@ -55,10 +86,14 @@ const Round = props => {
     <div className={classes.root}>
       <Grid container direction="column" spacing={3}>
         <Grid item>
-          <Typography>Ronda {round.round}</Typography>
+          <center>
+            <Typography variant="h2">Ronda {round.round}</Typography>
+          </center>
         </Grid>
         <Grid item>
-          <Typography>Jugador {round.player}</Typography>
+          <center>
+            <Typography variant="h5">{player.name}</Typography>
+          </center>
         </Grid>
         <Grid item>
           <TextField
@@ -76,9 +111,31 @@ const Round = props => {
             }}
             margin="normal"
             fullWidth
+            variant="outlined"
+            inputProps={{
+              style: { textAlign: "center" }
+            }}
+            InputProps={{
+              classes: {
+                root: classes.inputRoot,
+                outlined: classes.input,
+                notchedOutline: classes.notchedOutline
+              }
+            }}
+            InputLabelProps={{
+              classes: {
+                root: classes.labelRoot,
+                outlined: classes.labelProps,
+                focused: classes.labelFocused
+              }
+            }}
           >
             {moves.map(option => (
-              <MenuItem key={option.value} value={option.value}>
+              <MenuItem
+                key={option.value}
+                value={option.value}
+                className={classes.menuItem}
+              >
                 {option.label}
               </MenuItem>
             ))}

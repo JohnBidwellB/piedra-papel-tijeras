@@ -4,32 +4,33 @@ import { TextField, Button, Grid, Typography } from "@material-ui/core";
 import { gameConstants } from "../../actions/types";
 import { useDispatch } from "react-redux";
 
-
-
 const useStyles = makeStyles(theme => ({
   root: {},
   textField: {},
   inputRoot: {
     fontSize: "1.5em",
-    borderRadius: 60
+    borderRadius: 60,
+    textAlign: "center",
   },
-  labelProps: {
-    // width: "100%",
+  input: {
     left: "50%",
     top: "50%",
-    // right: "50%",
-    // textAlign: "center",
     transform: "translate(-50%, -50%)"
   },
-  focused: {
-    left: "50%",
+  labelRoot: {
+  },
+  labelProps: {
+    // left: "50%",
+    // top: "50%",
+    // transform: "translate(-50%, -50%)",
+  },
+  labelFocused: {
+    // Se activa cuando hago click en un input
+    left: "0%",
     top: "0%",
-    transform: "translate(-50%, 0%)",
-    "& label.Mui-focused": {
-      color: "green"
-    }
-    // borderColor: "green"
-  }
+    transform: "translate(0%, 0%)"
+  },
+  notchedOutline: {}
 }));
 
 const PlayersForm = props => {
@@ -43,7 +44,7 @@ const PlayersForm = props => {
       name: ""
     },
     player2: {
-      id: 1,
+      id: 2,
       name: ""
     }
   });
@@ -71,7 +72,7 @@ const PlayersForm = props => {
       <Grid container spacing={4} direction="column" justifyContent="center">
         <Grid item>
           <center>
-            <Typography variant="h1">Ingreso de jugadores</Typography>
+            <Typography variant="h2">Ingreso de jugadores</Typography>
           </center>
         </Grid>
 
@@ -87,17 +88,22 @@ const PlayersForm = props => {
             fullWidth
             onChange={updateForm}
             variant="outlined"
-            // inputProps={{
-            //   style: { textAlign: "center" }
-            // }}
-            // InputLabelProps={{style: classes.labelProps}}
-            InputProps={{classes: {root: classes.inputRoot}}}
+            inputProps={{
+              style: { textAlign: "center" }
+            }}
+            InputProps={{
+              classes: {
+                root: classes.inputRoot,
+                outlined: classes.input,
+                notchedOutline: classes.notchedOutline
+              }
+            }}
             InputLabelProps={{
               classes: {
-                outlined: classes.label,
-                focused: classes.focused
+                root: classes.labelRoot,
+                outlined: classes.labelProps,
+                focused: classes.labelFocused
               }
-              // style: { transform: 'translate(50%, 0)' }
             }}
           />
         </Grid>
@@ -113,8 +119,22 @@ const PlayersForm = props => {
             fullWidth
             onChange={updateForm}
             variant="outlined"
-            inputProps={{ style: { textAlign: "center" } }}
-            // inputLabelProps={{ style: { textAlign: "center" } }}
+            inputProps={{
+              style: { textAlign: "center" }
+            }}
+            InputProps={{
+              classes: {
+                root: classes.inputRoot,
+                outlined: classes.input,
+                notchedOutline: classes.notchedOutline
+              }
+            }}
+            InputLabelProps={{
+              classes: {
+                outlined: classes.labelProps,
+                focused: classes.labelFocused
+              }
+            }}
           />
         </Grid>
         <Grid item>
@@ -124,7 +144,7 @@ const PlayersForm = props => {
             fullWidth
             disabled={!valid}
             onClick={() =>
-              dispatch({ type: gameConstants.ENTER_PLAYERS_FINISHED, players })
+              dispatch({ type: gameConstants.ENTER_PLAYERS_FINISHED, players: [players.player1, players.player2] })
             }
           >
             Comenzar el juego

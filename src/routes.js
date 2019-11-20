@@ -7,6 +7,7 @@ import { ConnectedRouter } from "connected-react-router";
 import { history } from "./store";
 import { connect } from "react-redux";
 import DefaultPage from "./containers/Default";
+import Game from "./containers/Game";
 
 const Routes = props => {
   return (
@@ -15,6 +16,7 @@ const Routes = props => {
         <ConnectedRouter history={history}>
           <Switch>
             <Route exact path="/" component={DefaultPage} />
+            <Route exact path="/game" component={Game} />
             <Route component={Error404} />
           </Switch>
         </ConnectedRouter>

@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Container, LinearProgress } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,7 +16,10 @@ const Layout = props => {
 
   return (
     <div className={classes.root}>
-      <main className={classes.content}>{props.children}</main>
+      <main className={classes.content}>
+        <LinearProgress variant="determinate" value={20} />
+        <Container maxWidth="sm">{props.children}</Container>
+      </main>
     </div>
   );
 };

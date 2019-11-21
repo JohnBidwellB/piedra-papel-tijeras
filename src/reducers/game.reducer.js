@@ -10,13 +10,7 @@ const initialState = {
   round: {
     round: 0,
     player: 0,
-    results: [
-      { round: 1, player_1: "", player_2: "", winner: -1 }
-      // { round: 2, player_1: "", player_2: "", winner: -1 },
-      // { round: 3, player_1: "", player_2: "", winner: -1 },
-      // { round: 4, player_1: "", player_2: "", winner: -1 },
-      // { round: 5, player_1: "", player_2: "", winner: -1 }
-    ]
+    results: [{ round: 1, player_1: "", player_2: "", winner: -1 }]
   },
   moves: moves
 };
@@ -77,7 +71,15 @@ export default function(state = initialState, action) {
           ]
         }
       };
-
+    case gameConstants.FINISH_GAME:
+      return {
+        ...state,
+        round: {
+          ...state.round,
+          round: -1,
+          player: action.winner
+        }
+      };
     default:
       return state;
   }

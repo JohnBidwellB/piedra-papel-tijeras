@@ -6,8 +6,9 @@ import {
   ListItemText,
   Grid
 } from "@material-ui/core";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
+import { gameConstants } from "../../actions/types";
 
 const getWinner = (result, players) => {
   const player = players.find(player => player.id === result.winner);
@@ -23,9 +24,7 @@ const getWinner = (result, players) => {
 };
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    
-  },
+  root: {},
   list: {
     maxHeight: `${window.innerHeight * 0.4}px`,
     width: "100%",
@@ -36,8 +35,10 @@ const useStyles = makeStyles(theme => ({
 
 const Results = props => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const round = useSelector(state => state.game.round);
   const players = useSelector(state => state.game.players);
+
   const results =
     round &&
     round.results.filter(
@@ -47,6 +48,17 @@ const Results = props => {
         result.player_2 &&
         result.player_2.length > 0
     );
+
+  const player1Wins = results.filter(result => result.winner === 1);
+  const player2Wins = results.filter(result => result.winner === 2);
+
+  if (player1Wins.length === 3 || player2Wins.length === 3 && round.round !== -1) {
+    dispatch({
+      type: gameConstants.FINISH_GAME,
+      winner: player1Wins.length === 3 ? 1 : 2
+    });
+  }
+
   return (
     <div className={classes.root}>
       <Typography variant="h5">Resultados</Typography>
@@ -61,7 +73,7 @@ const Results = props => {
             </Grid>
           </Grid>
         </ListItem>
-        {results.map((result, index) => (
+        {results.map(result => (
           <ListItem>
             <Grid container spacing={4}>
               <Grid item xs={3}>

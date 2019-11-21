@@ -1,10 +1,11 @@
 import React from "react";
 import { Typography, Button, Grid } from "@material-ui/core";
 import { gameConstants } from "../../actions/types";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Winner = props => {
   const dispatch = useDispatch();
+  const winner = useSelector(state => state.game.players.find(player => player.id === state.game.round.player))
   return (
     <div>
       <Grid
@@ -16,7 +17,7 @@ const Winner = props => {
       >
         <Grid item>
           <center>
-            <Typography variant="h2">Tenemos un ganador!</Typography>
+            <Typography variant="h2">{winner.name} ha ganado la partida</Typography>
           </center>
         </Grid>
         <Grid item>

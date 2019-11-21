@@ -49,12 +49,8 @@ const useStyles = makeStyles(theme => ({
   },
   labelRoot: {},
   labelProps: {
-    // left: "50%",
-    // top: "50%",
-    // transform: "translate(-50%, -50%)",
   },
   labelFocused: {
-    // Se activa cuando hago click en un input
     left: "0%",
     top: "0%",
     transform: "translate(0%, 0%)"

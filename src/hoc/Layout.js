@@ -1,13 +1,14 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, LinearProgress, Grid } from "@material-ui/core";
+import { Container, LinearProgress } from "@material-ui/core";
 import { useSelector } from "react-redux";
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    
   },
   content: {
     flexGrow: 1
@@ -17,7 +18,8 @@ const useStyles = makeStyles(theme => ({
     left: "50%",
     top: "50%",
     transform: "translate(-50%, -50%)",
-    width: '100%'
+    width: '100%',
+    maxHeight: `${window.innerHeight * 0.8}px`
   }
 }));
 

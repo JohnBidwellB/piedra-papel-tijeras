@@ -6,7 +6,6 @@ import * as actions from "./actions";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "./store";
 import { connect } from "react-redux";
-import DefaultPage from "./containers/Default";
 import Game from "./containers/Game";
 
 const Routes = props => {

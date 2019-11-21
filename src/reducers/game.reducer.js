@@ -70,7 +70,6 @@ export default function(state = initialState, action) {
             ...state.round.results,
             {
               round: state.round.round,
-              // round: state.round.round + 1,
               player_1: "",
               player_2: "",
               winner: -1

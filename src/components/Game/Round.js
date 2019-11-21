@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Typography,
@@ -12,10 +12,7 @@ import { gameConstants } from "../../actions/types";
 import { useSnackbar } from "notistack";
 
 const roundWinnerMessage = (result, players) => {
-  console.log("result: ", result);
-  console.log("Player: ", players);
   const player = players.find(player => player.id === result.winner);
-  console.log("PlayerID: ", player);
   switch (result.winner) {
     case 1:
     case 2:
@@ -107,7 +104,7 @@ const Round = props => {
     console.log("New rounds: ", newRounds);
     // newRounds[round.round - 1][
     newRounds.slice(-1)[0][round.player === 1 ? "player_1" : "player_2"] = move;
-    if (round.player === 2 && move != "") {
+    if (round.player === 2 && move !== "") {
       newRounds.slice(-1)[0]["winner"] = setRoundWinner();
     }
     return newRounds;
@@ -124,9 +121,16 @@ const Round = props => {
       type: gameConstants.NEXT_PLAYER,
       nextRound: nextRound
     });
-    if (round.player === 2 && move != "") {
+    if (round.player === 2 && move !== "") {
       enqueueSnackbar(
-        roundWinnerMessage(nextRound.results.slice(-1)[0], players)
+        roundWinnerMessage(nextRound.results.slice(-1)[0], players),
+        {
+          variant: "success",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right"
+          }
+        }
       );
       dispatch({ type: gameConstants.ADD_ROUND });
     }

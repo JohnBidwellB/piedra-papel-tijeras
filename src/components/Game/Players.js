@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles, withStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/styles";
 import { TextField, Button, Grid, Typography } from "@material-ui/core";
 import { gameConstants } from "../../actions/types";
 import { useDispatch } from "react-redux";
@@ -20,12 +20,8 @@ const useStyles = makeStyles(theme => ({
   labelRoot: {
   },
   labelProps: {
-    // left: "50%",
-    // top: "50%",
-    // transform: "translate(-50%, -50%)",
   },
   labelFocused: {
-    // Se activa cuando hago click en un input
     left: "0%",
     top: "0%",
     transform: "translate(0%, 0%)"

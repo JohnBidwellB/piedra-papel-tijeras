@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import {
   Typography,
   List,
@@ -7,11 +7,13 @@ import {
   Grid
 } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
 
 const getWinner = (result, players) => {
-  const player = players.find(player => player.id === result.winner)
+  const player = players.find(player => player.id === result.winner);
   switch (result.winner) {
-    case 1: case 2:
+    case 1:
+    case 2:
       return player.name;
     case 0:
       return "Empate";
@@ -20,9 +22,22 @@ const getWinner = (result, players) => {
   }
 };
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    
+  },
+  list: {
+    maxHeight: `${window.innerHeight * 0.4}px`,
+    width: "100%",
+    overflow: "auto",
+    position: "relative"
+  }
+}));
+
 const Results = props => {
+  const classes = useStyles();
   const round = useSelector(state => state.game.round);
-  const players = useSelector(state => state.game.players)
+  const players = useSelector(state => state.game.players);
   const results =
     round &&
     round.results.filter(
@@ -32,11 +47,10 @@ const Results = props => {
         result.player_2 &&
         result.player_2.length > 0
     );
-  console.log("Round: ", round);
   return (
-    <Fragment>
+    <div className={classes.root}>
       <Typography variant="h5">Resultados</Typography>
-      <List>
+      <List dense className={classes.list}>
         <ListItem>
           <Grid container spacing={4}>
             <Grid item xs={3}>
@@ -62,7 +76,7 @@ const Results = props => {
           </ListItem>
         ))}
       </List>
-    </Fragment>
+    </div>
   );
 };
 

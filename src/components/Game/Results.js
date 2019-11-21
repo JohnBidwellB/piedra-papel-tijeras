@@ -8,12 +8,26 @@ import {
 } from "@material-ui/core";
 import { useSelector } from "react-redux";
 
+const getWinner = (result, players) => {
+  const player = players.find(player => player.id === result.winner)
+  switch (result.winner) {
+    case 1: case 2:
+      return player.name;
+    case 0:
+      return "Empate";
+    default:
+      return "No se ha podido calcular el ganador";
+  }
+};
+
 const Results = props => {
   const round = useSelector(state => state.game.round);
+  const players = useSelector(state => state.game.players)
   const results =
     round &&
     round.results.filter(
       result =>
+        result.player_1 &&
         result.player_1.length > 0 &&
         result.player_2 &&
         result.player_2.length > 0
@@ -38,11 +52,11 @@ const Results = props => {
             <Grid container spacing={4}>
               <Grid item xs={3}>
                 <ListItemText style={{ textAlign: "center" }}>
-                  {index + 1}
+                  {result.round}
                 </ListItemText>
               </Grid>
               <Grid item xs={9}>
-                <ListItemText>Ganador</ListItemText>
+                <ListItemText>{getWinner(result, players)}</ListItemText>
               </Grid>
             </Grid>
           </ListItem>

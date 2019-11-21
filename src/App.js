@@ -16,7 +16,7 @@ const App = () => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <ThemeProvider theme={theme}>
-        <SnackbarProvider>
+        <SnackbarProvider maxSnack={5}>
           <BrowserRouter>
             <Routes />
           </BrowserRouter>

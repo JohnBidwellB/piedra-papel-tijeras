@@ -16,10 +16,11 @@ const getScreen = round => {
     case 0:
       return <PlayersForm />;
     case 1:
-      return <Round key={`round-${round.round}-player-${round.player}`} />;
     case 2:
       return <Round key={`round-${round.round}-player-${round.player}`} />;
     case 3:
+    case 4:
+    case 5:
       return (
         <Grid container direction="column" spacing={3}>
           <Grid item>
@@ -30,13 +31,19 @@ const getScreen = round => {
           </Grid>
         </Grid>
       );
-    case 4:
+    case -1:
       return <Winner />;
-
-    case "round_1":
-      return <RoundTitle />;
     default:
-      return <PlayersForm />;
+      return (
+        <Grid container direction="column" spacing={3}>
+          <Grid item>
+            <Round key={`round-${round.round}-player-${round.player}`} />
+          </Grid>
+          <Grid item>
+            <Results />
+          </Grid>
+        </Grid>
+      );
   }
 };
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Typography,
@@ -9,6 +9,23 @@ import {
 } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { gameConstants } from "../../actions/types";
+import { useSnackbar } from "notistack";
+
+const roundWinnerMessage = (result, players) => {
+  console.log("result: ", result);
+  console.log("Player: ", players);
+  const player = players.find(player => player.id === result.winner);
+  console.log("PlayerID: ", player);
+  switch (result.winner) {
+    case 1:
+    case 2:
+      return `${player.name} ha ganado la ronda`;
+    case 0:
+      return "Ha ocurrido un empate";
+    default:
+      return "No se ha podido calcular el ganador de la ronda";
+  }
+};
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -53,10 +70,12 @@ const Round = props => {
   const dispatch = useDispatch();
   const round = useSelector(state => state.game.round);
   const moves = useSelector(state => state.game.moves);
+  const players = useSelector(state => state.game.players);
   const player = useSelector(state =>
     state.game.players.filter(player => player.id === round.player)
   )[0];
-  console.log("Player: ", player)
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
   moves.map(move => {
     move.value = move.move;
     move.label = move.move;
@@ -68,11 +87,29 @@ const Round = props => {
     setMove(event.target.value);
   };
 
+  const setRoundWinner = () => {
+    let currentRound = round.results.find(
+      result => result.round === round.round
+    );
+    let move_1 = moves.find(move => move.move === currentRound.player_1);
+    let move_2 = moves.find(move => move.move === currentRound.player_2);
+
+    if (move_1.kills === move_2.move) {
+      return 1;
+    } else if (move_2.kills === move_1.move) {
+      return 2;
+    }
+    return 0;
+  };
+
   const setRounds = () => {
     let newRounds = round.results;
-    newRounds[round.round - 1][
-      round.player === 1 ? "player_1" : "player_2"
-    ] = move;
+    console.log("New rounds: ", newRounds);
+    // newRounds[round.round - 1][
+    newRounds.slice(-1)[0][round.player === 1 ? "player_1" : "player_2"] = move;
+    if (round.player === 2 && move != "") {
+      newRounds.slice(-1)[0]["winner"] = setRoundWinner();
+    }
     return newRounds;
   };
 
@@ -80,6 +117,19 @@ const Round = props => {
     round: round.player === 2 ? round.round + 1 : round.round,
     player: round.player === 1 ? 2 : 1,
     results: setRounds()
+  };
+
+  const handleNextTurn = () => {
+    dispatch({
+      type: gameConstants.NEXT_PLAYER,
+      nextRound: nextRound
+    });
+    if (round.player === 2 && move != "") {
+      enqueueSnackbar(
+        roundWinnerMessage(nextRound.results.slice(-1)[0], players)
+      );
+      dispatch({ type: gameConstants.ADD_ROUND });
+    }
   };
 
   return (
@@ -144,12 +194,13 @@ const Round = props => {
         <Grid item>
           <Button
             variant="contained"
-            onClick={() =>
-              dispatch({
-                type: gameConstants.NEXT_PLAYER,
-                nextRound: nextRound
-              })
-            }
+            onClick={() => handleNextTurn()}
+            // onClick={() =>
+            //   dispatch({
+            //     type: gameConstants.NEXT_PLAYER,
+            //     nextRound: nextRound
+            //   })
+            // }
             fullWidth
             color="primary"
             disabled={!move}

@@ -23,6 +23,11 @@ const Ranking = props => {
   const classes = useStyles();
   const winsState = useSelector(state => state.game.wins);
   const wins = winsState ? Object.entries(winsState) : [];
+  wins.sort(function(a, b) {
+    if (a[1] < b[1]) return 1;
+    else if (a[1] > b[1]) return -1;
+    return 0;
+  });
 
   return (
     <div className={classes.root}>

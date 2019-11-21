@@ -48,8 +48,7 @@ const useStyles = makeStyles(theme => ({
     transform: "translate(-50%, -50%)"
   },
   labelRoot: {},
-  labelProps: {
-  },
+  labelProps: {},
   labelFocused: {
     left: "0%",
     top: "0%",
@@ -97,8 +96,6 @@ const Round = props => {
 
   const setRounds = () => {
     let newRounds = round.results;
-    console.log("New rounds: ", newRounds);
-    // newRounds[round.round - 1][
     newRounds.slice(-1)[0][round.player === 1 ? "player_1" : "player_2"] = move;
     if (round.player === 2 && move !== "") {
       newRounds.slice(-1)[0]["winner"] = setRoundWinner();
@@ -125,7 +122,8 @@ const Round = props => {
           anchorOrigin: {
             vertical: "top",
             horizontal: "right"
-          }
+          },
+          autoHideDuration: 3000
         }
       );
       dispatch({ type: gameConstants.ADD_ROUND });

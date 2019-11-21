@@ -41,7 +41,7 @@ export default function(state = initialState, action) {
         }
       };
     case gameConstants.NEW_GAME:
-      return { ...initialState };
+      return { ...initialState, wins: state.wins };
     case gameConstants.SET_ROUND_WINNER:
       return {
         ...state,
@@ -72,14 +72,34 @@ export default function(state = initialState, action) {
         }
       };
     case gameConstants.FINISH_GAME:
+      const wins = {
+        ...state.wins
+      };
+      let hasWinned = wins[action.player.name];
+      if (hasWinned) {
+        wins[action.player.name] = wins[action.player.name] + 1;
+      } else {
+        wins[action.player.name] = 1;
+      }
       return {
         ...state,
         round: {
           ...state.round,
           round: -1,
           player: action.winner
+        },
+        wins: {
+          ...wins
         }
       };
+    case gameConstants.GO_TO_RANKING:
+      return {
+        ...state,
+        round: {
+          ...state.round,
+          round: -2
+        }
+      }
     default:
       return state;
   }

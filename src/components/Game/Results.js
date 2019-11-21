@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import {
   Typography,
   List,
@@ -49,10 +49,9 @@ const Results = props => {
         result.player_2.length > 0
     );
 
-  const player1Wins = results.filter(result => result.winner === 1);
-  const player2Wins = results.filter(result => result.winner === 2);
-
   useEffect(() => {
+    const player1Wins = results.filter(result => result.winner === 1);
+    const player2Wins = results.filter(result => result.winner === 2);
     if (
       player1Wins.length === 3 ||
       (player2Wins.length === 3 && round.round !== -1)
@@ -65,7 +64,7 @@ const Results = props => {
         player: player
       });
     }
-  }, [results]);
+  });
 
   return (
     <div className={classes.root}>

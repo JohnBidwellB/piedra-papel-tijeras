@@ -1,7 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, LinearProgress } from "@material-ui/core";
+import { Container, LinearProgress, IconButton } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import { Settings as SettingsIcon } from "@material-ui/icons";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,6 +20,11 @@ const useStyles = makeStyles(theme => ({
     transform: "translate(-50%, -50%)",
     width: "100%",
     maxHeight: `${window.innerHeight * 0.8}px`
+  },
+  settingsIcon: {
+    position: "absolute",
+    top: 8,
+    right: 8
   }
 }));
 
@@ -55,6 +61,10 @@ const Layout = props => {
           variant="determinate"
           value={getProgresValue(maxWinner)}
         />
+        <IconButton className={classes.settingsIcon}>
+          <SettingsIcon />
+        </IconButton>
+
         <div className={classes.container}>
           <Container maxWidth="sm">{props.children}</Container>
         </div>

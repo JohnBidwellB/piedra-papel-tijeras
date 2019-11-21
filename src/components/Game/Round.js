@@ -66,7 +66,7 @@ const Round = props => {
   const player = useSelector(state =>
     state.game.players.filter(player => player.id === round.player)
   )[0];
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   moves.map(move => {
     move.value = move.move;

@@ -8,8 +8,11 @@ import Winner from "../components/Game/Winner";
 import Ranking from "../components/Game/Ranking";
 import { Grid, Button } from "@material-ui/core";
 import { gameConstants } from "../actions/types";
+
+
 const useStyles = makeStyles(theme => ({
-  root: {}
+  root: {},
+
 }));
 
 const getScreen = (round, button) => {
@@ -82,7 +85,12 @@ const Game = props => {
     return (
       <div className={classes.root}>{getScreen(round, newGameButton)}</div>
     );
-  else return <div className={classes.root}>{getScreen(round)}</div>;
+  else
+    return (
+      <div className={classes.root}>
+        {getScreen(round)}
+      </div>
+    );
 };
 
 export default Game;

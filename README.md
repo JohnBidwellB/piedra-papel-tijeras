@@ -2,8 +2,6 @@
 
 Juego online de piera-papel-tijeras desarrollado en React.
 
-Para ver una demo hacer [click aquí]().
-
 ## Características
 * Gana la partida el jugador que gane primero 3 rondas.
 * Ranking de ganadores.

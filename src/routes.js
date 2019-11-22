@@ -7,18 +7,20 @@ import { ConnectedRouter } from "connected-react-router";
 import { history } from "./store";
 import { connect } from "react-redux";
 import Game from "./containers/Game";
+import Movements from "./components/Game/Movements";
 
 const Routes = props => {
   return (
     <div className="app">
-      <Layout>
-        <ConnectedRouter history={history}>
+      <ConnectedRouter history={history}>
+        <Layout>
           <Switch>
             <Route exact path={["/", "/game"]} component={Game} />
+            <Route path="/movements" component={Movements} />
             <Route component={Error404} />
           </Switch>
-        </ConnectedRouter>
-      </Layout>
+        </Layout>
+      </ConnectedRouter>
     </div>
   );
 };

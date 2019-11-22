@@ -1,8 +1,15 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, LinearProgress, IconButton } from "@material-ui/core";
+import {
+  Container,
+  LinearProgress,
+  IconButton,
+  Button
+} from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { Settings as SettingsIcon } from "@material-ui/icons";
+import { ArrowBack as ArrowBackIcon } from "@material-ui/icons";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,12 +26,20 @@ const useStyles = makeStyles(theme => ({
     top: "50%",
     transform: "translate(-50%, -50%)",
     width: "100%",
-    maxHeight: `${window.innerHeight * 0.8}px`
+    maxHeight: `${window.innerHeight * 0.9}px`
   },
   settingsIcon: {
     position: "absolute",
     top: 8,
     right: 8
+  },
+  back: {
+    position: "absolute",
+    top: 8,
+    left: 8
+  },
+  arrowIcon: {
+    fontSize: 32
   }
 }));
 
@@ -44,27 +59,30 @@ const getProgresValue = round => {
 };
 const Layout = props => {
   const classes = useStyles();
-
+  let history = useHistory();
   const round = useSelector(state => state.game.round);
-  const player1Wins = round.results.filter(result => result.winner === 1);
-  const player2Wins = round.results.filter(result => result.winner === 2);
-
-  let maxWinner =
-    player1Wins.length > player2Wins.length
-      ? player1Wins.length
-      : player2Wins.length;
 
   return (
     <div className={classes.root}>
       <main className={classes.content}>
         <LinearProgress
           variant="determinate"
-          value={getProgresValue(maxWinner)}
+          value={getProgresValue(round.round)}
         />
-        <IconButton className={classes.settingsIcon}>
+        <div className={classes.back}>
+          <Button onClick={() => history.goBack()}>
+            <ArrowBackIcon className={classes.arrowIcon} /> Volver al juego
+          </Button>
+        </div>
+        {/* <Link to={{ pathname: "/movements" }}> */}
+        <IconButton
+          className={classes.settingsIcon}
+          // onClick={() => <Redirect to="/movements" push={true} />}
+          onClick={() => history.push("/movements")}
+        >
           <SettingsIcon />
         </IconButton>
-
+        {/* </Link> */}
         <div className={classes.container}>
           <Container maxWidth="sm">{props.children}</Container>
         </div>

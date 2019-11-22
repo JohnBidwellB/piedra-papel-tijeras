@@ -65,7 +65,7 @@ const PlayersForm = props => {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={4} direction="column" justifyContent="center">
+      <Grid container spacing={4} direction="column" justify="center">
         <Grid item>
           <center>
             <Typography variant="h2">Ingreso de jugadores</Typography>
@@ -90,14 +90,14 @@ const PlayersForm = props => {
             InputProps={{
               classes: {
                 root: classes.inputRoot,
-                outlined: classes.input,
+                // outlined: classes.input,
                 notchedOutline: classes.notchedOutline
               }
             }}
             InputLabelProps={{
               classes: {
                 root: classes.labelRoot,
-                outlined: classes.labelProps,
+                // outlined: classes.labelProps,
                 focused: classes.labelFocused
               }
             }}
@@ -121,13 +121,12 @@ const PlayersForm = props => {
             InputProps={{
               classes: {
                 root: classes.inputRoot,
-                outlined: classes.input,
                 notchedOutline: classes.notchedOutline
               }
             }}
             InputLabelProps={{
               classes: {
-                outlined: classes.labelProps,
+                root: classes.labelRoot,
                 focused: classes.labelFocused
               }
             }}

@@ -166,14 +166,14 @@ const Round = props => {
             InputProps={{
               classes: {
                 root: classes.inputRoot,
-                outlined: classes.input,
+                // outlined: classes.input,
                 notchedOutline: classes.notchedOutline
               }
             }}
             InputLabelProps={{
               classes: {
                 root: classes.labelRoot,
-                outlined: classes.labelProps,
+                // outlined: classes.labelProps,
                 focused: classes.labelFocused
               }
             }}

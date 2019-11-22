@@ -2,9 +2,12 @@
 
 Juego online de piera-papel-tijeras desarrollado en React.
 
+Puedes probar una demo haciendo [click aquí](http://cagey-pollution.surge.sh/).
+
 ## Características
 * Gana la partida el jugador que gane primero 3 rondas.
 * Ranking de ganadores.
+* Posibilidad de modificar jugadas durante el juego.
 
 ## Prerrequisitos
 * Node V8.4.0 o superior.

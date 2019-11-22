@@ -70,7 +70,7 @@ const Results = props => {
     <div className={classes.root}>
       <Typography variant="h5">Resultados</Typography>
       <List dense className={classes.list}>
-        <ListItem>
+        <ListItem key="list-header">
           <Grid container spacing={4}>
             <Grid item xs={3}>
               <ListItemText style={{ textAlign: "center" }}>Ronda</ListItemText>
@@ -81,7 +81,7 @@ const Results = props => {
           </Grid>
         </ListItem>
         {results.map(result => (
-          <ListItem>
+          <ListItem key={`results-round-${result.round}`}>
             <Grid container spacing={4}>
               <Grid item xs={3}>
                 <ListItemText style={{ textAlign: "center" }}>

@@ -2,7 +2,7 @@
   "name": "piedra-papel-tijera",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://johnbidwellb.github.io/piedra-papel-tijeras/",
+  "homepage": "",
   "dependencies": {
     "@material-ui/core": "^4.6.1",
     "@material-ui/icons": "^4.5.1",

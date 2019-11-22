@@ -70,7 +70,7 @@ const Ranking = props => {
               </ListItem>
 
               {wins.map(win => (
-                <ListItem className={classes.listItem}>
+                <ListItem key={win[1]} className={classes.listItem}>
                   <Grid
                     item
                     container
